@@ -1,14 +1,34 @@
 body{
     margin:0;
 }
-#profilesection{
-    width:500px;
-    height:500px;
-    border:1px solid black;
-    border-radius:50%;
-    background-image:url(images/plague_doc.jfif);
-    background-repeat:no-repeat;
+#all_image_select_section{
+    display:flex;
+    padding:20px;
+}
+#profilesection {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-repeat: no-repeat;
 }
 #profilesection:hover{
     cursor:grab;
+}
+.provided_image{
+    width:200px;
+    height:200px;
+    margin-right:10px;
+    border:2px double black;
+    transition:border 0.2s ease;
+}
+.provided_image:hover{
+    border:darkorange 5px solid;
+    cursor:pointer;
+}
+#provided_images{
+    display:flex;
+    flex-wrap:wrap;
+    width:800px;
+    padding:20px;
 }
