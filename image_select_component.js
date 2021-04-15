@@ -65,19 +65,16 @@ function check_small_image() {
     var profwidth2 = parseInt(compsize.width.split('px')[0]);
     var profheight2 = parseInt(compsize.height.split('px')[0]);
     if (profwidth2 >= imageex.width) {
-        alert(profwidth2 + 'and' + imageex.width);
         widthcheck = false;
         profelement.style.backgroundPosition = (profwidth2 - imageex.width) / 2 + 'px ' + '0';
     } else {
         widthcheck = true;
     }
     if (profheight2 >= imageex.height) {
-        //alert(profheight2 + 'and2' + imageex.height);
         heightcheck = false;
         if (widthcheck == false) {
             profelement.style.backgroundPosition = (profwidth2 - imageex.width) / 2 + 'px ' + (profheight2 - imageex.height) / 2 + 'px';
         } else {
-            //  alert('eyyyy');
             profelement.style.backgroundPosition = '0 ' + (profheight2 - imageex.height) / 2 + 'px';
         }
     } else {
@@ -135,24 +132,20 @@ function drag_background_image(e) {
                 diffy = (profheight - image.height) / 2;
             }
             el.style.backgroundPosition = diffx + "px " + diffy + "px";
-            //alert(el.style.backgroundPosition);
         } else {
             var actualvals = this.style.backgroundPosition.split(" ");
-            //alert(image.width);
             var actx = parseInt(actualvals[0].replace("px", ""));
             var acty = parseInt(actualvals[1].replace("px", ""));
             actx += diffx;
             acty += diffy;
             var unevenactx = actx;
             var unevenacty = acty;
-            //alert(actx);
             if (actx > 0) {
                 actx = 0;
             }
             //if ((!(widthcheck && heightcheck)) && actx >= unevenactx) {
             //  actx = unevenactx;
             //}
-            //alert((image.width * -1) + profwidth+"actis"+actx);
             if (actx < image.width * -1 + profwidth) {
                 actx = image.width * -1 + profwidth;
             }
@@ -171,7 +164,6 @@ function drag_background_image(e) {
             if (heightcheck == false) {
                 acty = (profheight - image.height) / 2;
             }
-            //alert(actx + "and" + img.width);
             el.style.backgroundPosition = actx + "px " + acty + "px";
         }
     }
