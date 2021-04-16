@@ -21,6 +21,11 @@ function Imageselectsection(props) {
     return React.createElement(
         'div',
         { id: 'image_select_section' },
+        React.createElement(
+            'h2',
+            null,
+            'Pick an Image for Your Profile'
+        ),
         React.createElement(Imageselect, null)
     );
 }

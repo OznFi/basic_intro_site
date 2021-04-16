@@ -17,7 +17,7 @@ function Imageselectsection(props) {
         imageobjects.push({ imagesource: imageslist[o], id: o, background_pos: '0 0' });
     }
     return <div id="image_select_section">
-        
+        <h2>Pick an Image for Your Profile</h2>
         <Imageselect />    
     </div>;
 } 
