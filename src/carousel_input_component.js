@@ -10,9 +10,27 @@ var initial_left_state = true; var initial_right_state = true;
 function Fullcarousel(props) {
 
     return <div>
+        <div id="carousel_zoom_image" onClick={unzoom}><img id="carousel_zoomed_image" /></div>
         <Addcarouselimages />
         <Carousel />
     </div>;
+}
+function zoom_image(e) {
+    var cont = e.target;
+    var zoomsection = document.getElementById("carousel_zoom_image");
+    var zoomimage = document.getElementById("carousel_zoomed_image");
+    var mainimg = images[currentimageindex].source;
+    zoomimage.src = mainimg;
+    zoomsection.style.display = "flex";
+    //for (let i = 0; i < 3; i++) {
+      //  if (cont.children[i].classList.contains("center_image")) {
+        //    mainimg = cont.children[i];
+        //}
+    //}
+}
+function unzoom() {
+    var zoomsection = document.getElementById("carousel_zoom_image");
+    zoomsection.style.display = "none";
 }
 function manual_set_images() {
     var imageright = document.querySelector(".carousel_main_image .right_image");
@@ -131,7 +149,7 @@ function Carousel(props) {
             <button type="button" onClick={function () { transition_to_right({ status: false, ind: '' }) }}>{">"}</button>
         </div>
         <Indexbuttons />
-        <div class='carousel_main_image'>
+        <div class='carousel_main_image' onClick={zoom_image}>
             <img class='carouselimage center_image' src={images[0].source}></img>
             <img class='carouselimage right_image' src={images[1].source}></img>
             <img class='carouselimage left_image' src={images[images.length-1].source}></img>
@@ -318,5 +336,5 @@ function render_carousel() {
     }, 50);
 }
 export {
-    Carousel, transition_to_right, transition_to_left, render_carousel
+    Carousel, transition_to_right, transition_to_left, render_carousel, images
 };

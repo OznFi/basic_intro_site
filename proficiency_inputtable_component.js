@@ -9,8 +9,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var inputs = [{ talent: 'eyy', level: 'yo', index: 0 }];
-var inputnum = inputs.length;
+var talent_inputs = [{ talent: 'eyy', level: 'yo', index: 0 }];
+var inputnum = talent_inputs.length;
 function Inputproftable(props) {
 
     return React.createElement(
@@ -53,13 +53,13 @@ var Inputrow = function (_React$Component) {
     _createClass(Inputrow, [{
         key: 'handletalent',
         value: function handletalent(e) {
-            inputs[this.state.index].talent = e.target.value;
+            talent_inputs[this.state.index].talent = e.target.value;
             this.setState({ talent: e.target.value });
         }
     }, {
         key: 'handlelevel',
         value: function handlelevel(e) {
-            inputs[this.state.index].talent = e.target.value;
+            talent_inputs[this.state.index].talent = e.target.value;
             this.setState({ level: e.target.value });
         }
     }, {
@@ -79,8 +79,8 @@ var Inputrow = function (_React$Component) {
 
 function Inputtable(props) {
     var profs = [];
-    for (var i = 0; i < inputs.length; i++) {
-        profs.push(React.createElement(Inputrow, { pair: inputs[i] }));
+    for (var i = 0; i < talent_inputs.length; i++) {
+        profs.push(React.createElement(Inputrow, { pair: talent_inputs[i] }));
     }
     return React.createElement(
         'div',
@@ -121,9 +121,9 @@ function Addnewrow(props) {
     );
 }
 function add_rows() {
-    if (inputs.length < 25) {
-        var empobj = { talent: 'Your talent here', level: 'Level of talent here', index: inputs.length };
-        inputs.push(empobj);
+    if (talent_inputs.length < 25) {
+        var empobj = { talent: 'Your talent here', level: 'Level of talent here', index: talent_inputs.length };
+        talent_inputs.push(empobj);
         render_input_table();
     } else {
         alert('You have exceeded the maximum number of proficiencies');
@@ -133,4 +133,4 @@ function render_input_table() {
     var el = document.getElementById('table_section');
     ReactDOM.render(React.createElement(Inputproftable, null), el);
 }
-export { Inputproftable, Inputrow, Inputtable, render_input_table, add_rows, Addnewrow };
+export { Inputproftable, Inputrow, Inputtable, render_input_table, add_rows, Addnewrow, talent_inputs };

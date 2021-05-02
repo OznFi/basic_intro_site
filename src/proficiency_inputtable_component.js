@@ -1,9 +1,9 @@
 'use strict';
 //these 2 variables would change when server and db is included
-var inputs = [
+var talent_inputs = [
     {talent:'eyy', level:'yo', index:0}
 ];
-var inputnum = inputs.length;
+var inputnum = talent_inputs.length;
 function Inputproftable(props) {
 
     return <div id='proficiency_addition'>
@@ -30,11 +30,11 @@ class Inputrow extends React.Component {
         this.handlelevel = this.handlelevel.bind(this);
     }
     handletalent(e) {
-        inputs[this.state.index].talent = e.target.value;
+        talent_inputs[this.state.index].talent = e.target.value;
         this.setState({ talent: e.target.value});
     }
     handlelevel(e) {
-        inputs[this.state.index].talent = e.target.value;
+        talent_inputs[this.state.index].talent = e.target.value;
         this.setState({ level: e.target.value});
     }
     render() {
@@ -48,8 +48,8 @@ class Inputrow extends React.Component {
 }
 function Inputtable(props) {
     var profs = [];
-    for (var i = 0; i < inputs.length; i++) {
-        profs.push(<Inputrow pair={inputs[i]} />);
+    for (var i = 0; i < talent_inputs.length; i++) {
+        profs.push(<Inputrow pair={talent_inputs[i]} />);
     }
     return <div id="proficiency_insert_table">
         <div id='table__insert_descriptors'>
@@ -68,9 +68,9 @@ function Addnewrow(props) {
     </div>;
 }
 function add_rows() {
-    if (inputs.length < 25) {
-        var empobj = { talent: 'Your talent here', level: 'Level of talent here', index: inputs.length };
-        inputs.push(empobj);
+    if (talent_inputs.length < 25) {
+        var empobj = { talent: 'Your talent here', level: 'Level of talent here', index: talent_inputs.length };
+        talent_inputs.push(empobj);
         render_input_table();
     }
     else {
@@ -82,5 +82,5 @@ function render_input_table() {
     ReactDOM.render(<Inputproftable />, el);
 }
 export {
-    Inputproftable, Inputrow, Inputtable, render_input_table, add_rows, Addnewrow
+    Inputproftable, Inputrow, Inputtable, render_input_table, add_rows, Addnewrow, talent_inputs
 };

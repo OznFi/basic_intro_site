@@ -1,5 +1,15 @@
 'use strict';
 
+var description_text_object = {
+    profile_welcome_textinput: '',
+    profile_nameinput: '',
+    profile_titleinput: '',
+    profile_textinput: ''
+};
+function profile_input_handle(e) {
+    var textval = e.target.value;
+    description_text_object[e.target.id] = textval;
+}
 function Profiletextsection(props) {
 
     return React.createElement(
@@ -25,7 +35,7 @@ function Welcometext(props) {
             { 'for': 'profile_welcome_textinput' },
             'Write a Welcoming Text!'
         ),
-        React.createElement('input', { type: 'text', id: 'profile_welcome_textinput' })
+        React.createElement('input', { type: 'text', id: 'profile_welcome_textinput', onInput: profile_input_handle })
     );
 }
 //The profile picture comp is for the actual rendering and not selection
@@ -52,13 +62,13 @@ function Nametitle(props) {
             { 'for': 'profile_nameinput' },
             'Enter Your Name'
         ),
-        React.createElement('input', { id: 'profile_nameinput' }),
+        React.createElement('input', { id: 'profile_nameinput', onInput: profile_input_handle }),
         React.createElement(
             'label',
             { 'for': 'profile_titleinput' },
             'Enter the Title(s) That Describe Your Expertise'
         ),
-        React.createElement('input', { id: 'profile_titleinput' })
+        React.createElement('input', { id: 'profile_titleinput', onInput: profile_input_handle })
     );
 }
 function Description(props) {
@@ -71,7 +81,7 @@ function Description(props) {
             { 'for': 'profile_textinput' },
             'Write a Text That Conveys Meaningful Information About You'
         ),
-        React.createElement('textarea', { id: 'profile_textinput' })
+        React.createElement('textarea', { id: 'profile_textinput', onInput: profile_input_handle })
     );
 }
 function inputrend() {

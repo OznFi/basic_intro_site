@@ -23,15 +23,23 @@ body{
 #profilesection:hover{
     cursor:grab;
 }
-.provided_image{
-    width:200px;
-    height:200px;
-    margin-right:10px;
-    border:2px double black;
-    transition:border 0.2s ease;
+.provided_image {
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 2px double black;
+    transition: border 0.2s ease;
+    object-fit: contain;
+    padding:2px;
+}
+.provided_image:nth-child(5){
+     border:4px solid transparent; /*this provides the thickness of the border image the order is important*/
+     border-image: url(images/color_stripe.jpg) 20% stretch repeat;
+
 }
 .provided_image:hover{
-    border:darkorange 5px solid;
+    border:darkorange 4px solid;
     cursor:pointer;
 }
 #provided_images{
@@ -39,6 +47,8 @@ body{
     flex-wrap:wrap;
     width:800px;
     padding:20px;
+    justify-content:center;
+    box-sizing:border-box;
 }
 /*profiletextsection*/
 #profile_text{
@@ -53,10 +63,23 @@ body{
     display:flex;
     flex-direction:column;
 }
+#profile_component input{
+    outline:none;
+    border: 1px solid rgba(0,0,0,0.6);
+    transition:border ease 0.3s;
+}
+#profile_component input:focus{
+    border:2px solid rgba(0,0,0,0.8);
+    box-shadow: -1px 0 2px, 0 -1px 1px, 1px 0 1px, 0 1px 1px;
+}
+#profile_imageaddition{
+    display:flex;
+    justify-content:flex-end;
+}
 #welcome_text_container {
     margin-bottom: 20px;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
 }
 #welcome_text_container label{
     text-align:unset;
@@ -103,10 +126,16 @@ body{
 #profile_textinput {
     resize: none;
     min-height: 100px;
-    padding:7px;
-    border:1px solid black;
-    border-radius:3px;
-    font-size:17px;
+    padding: 7px;
+    outline: none;
+    transition: border ease 0.3s;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 17px;
+}
+#profile_textinput:focus{
+    border:2px solid rgba(0,0,0,0.8);
+    box-shadow: -1px 0 2px, 0 -1px 1px, 1px 0 1px, 0 1px 1px;
 }
 /*the proficiency table starts here*/
 #table_section{
@@ -186,13 +215,40 @@ body{
     padding:40px;
     
 }
+#carousel_zoom_image{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    height:100%;
+    padding:10px;
+    box-sizing:border-box; /*this provides the padding to work properly*/
+    background-color:rgba(0,0,0,0.85);
+    z-index:999;
+}
+#carousel_zoom_image:hover{
+    cursor:zoom-out;
+}
+#carousel_zoomed_image{
+    overflow:hidden;
+    object-fit:scale-down;
+    margin-left:auto; margin-right:auto; 
+    animation:zoomed_img ease 0.3s;
+}
+@keyframes zoomed_img{
+    0%{transform:scale(0.5,0.5)}
+    100%{transform:scale(1,1)}
+}
 .carousel {
     position: relative;
     width: 600px;
     height: 400px;
     margin-left: auto;
     margin-right: auto;
-    border:1px solid blue;
+    border: 1px solid blue;
 }
 #full_carousel_head{
     height:120px;
@@ -308,6 +364,9 @@ body{
     width: 600px;
     height: 400px;
 }
+.carousel_main_image:hover{
+    cursor:zoom-in;
+}
 .carousel_main_image img{
     position:absolute;
     width:100%;
@@ -323,4 +382,78 @@ body{
 }
 .left_image {
     transition: left 0.4s ease, right 0.4s ease;
+}
+/*Carousel section ends here Contact info starts*/
+#contact_section{
+    padding:40px;
+}
+#contact_input_main_container {
+    display: flex;
+    padding: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.contact_input{
+    display:flex;
+    max-width:500px;
+    min-width:470px;
+    margin-right:25px;
+    margin-bottom:35px;
+    align-items:center;
+    box-sizing:border-box;
+}
+.contact_input_image{
+    width:150px;
+    height:150px;
+    overflow:hidden;
+    margin-right:10px;
+}
+.contact_inputfield{
+    width:250px;
+    height:30px;
+    font-size:20px;
+    padding:5px;
+    border:1px solid rgba(0,0,0,0.6);
+    border-radius:4px;
+    outline:none;
+    transition:border ease 0.4s;
+}
+.contact_inputfield:focus{
+    border:2px solid rgba(0,0,0,0.8);
+    box-shadow: -1px 0 10px orange, 0 -1px 1px, 1px 0 1px, 0 1px 1px;
+}
+.essential_contact_row{
+    display:flex;
+    margin-left:15px;
+    margin-right:15px;
+    justify-content:space-evenly;
+}
+.essential_input{
+    display:flex;
+    flex-direction:column;
+}
+.essential_input input{
+    width:350px;
+    height:21px;
+    font-size:17px;
+    padding:3px;
+}
+.essential_input label{
+    margin-bottom:4px;
+    font-size:17px;
+    font-weight:600;
+}
+#submit_page_button {
+    width: 100px;
+    height: 100px;
+    border: 1px rgba(0,0,0,0.4);
+    border-radius: 2px;
+    outline: none;
+    color:rgba(0,0,0,0.3);
+    background-color: rgba(255,165,0, 0.7);
+    transition:all ease 0.2s;
+}
+#submit_page_button:hover{
+    background-color: rgba(255,165,0, 0.9);
+    color:rgba(0,0,0,0.2);
 }
