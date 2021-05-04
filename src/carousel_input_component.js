@@ -62,6 +62,13 @@ function addimages(e) {
     reader.onload = function () {
         images.push({ source: reader.result, index: images.length });
         render_carousel();
+        if (images.length == 2) {
+            state0 = true;
+            init_state();
+        }
+        if (images.length == 1) {
+            currentimageindex = 0;
+        }
         e.target.value = null; //for some reaseon this allows me to add back the file again
         setTimeout(manual_set_images(), 500);
         //manual_set_images();
@@ -140,7 +147,23 @@ function init_state() {
     }
 }
 function Carousel(props) {
-    
+    if (images.length == 0) {
+        return <div class="carousel">
+            <p>No images yet!</p>
+
+        </div>;
+    }
+    if (images.length == 1) {
+        return <div class="carousel">
+            
+            <Indexbuttons />
+            <div class='carousel_main_image' onClick={zoom_image}>
+                <img class='carouselimage center_image' src={images[0].source}></img>
+               
+            </div>
+
+        </div>;
+    }
     return <div class="carousel">
         <div class='carousel_left_button'>
             <button type="button" onClick={function () { transition_to_left({status:false, ind:''}) }}>{"<"}</button>

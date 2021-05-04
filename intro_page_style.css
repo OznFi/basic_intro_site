@@ -12,13 +12,20 @@ body{
     display:flex;
     padding:20px;
 }
-#profilesection {
+#profile_section_container {
     width: 500px;
     height: 500px;
     border: 1px solid black;
     border-radius: 50%;
     background-repeat: no-repeat;
-    margin-right:50px;
+    margin-right: 50px;
+    overflow:hidden;
+    position:relative;
+}
+#profilesection {
+    position:absolute;
+    background-repeat: no-repeat;
+    
 }
 #profilesection:hover{
     cursor:grab;

@@ -31,6 +31,7 @@ function Imageselectsection(props) {
         React.createElement(Imageselect, null)
     );
 }
+//this addition requires server
 function addimages(e) {
     if (imageslist.length > total_profile_number) {
         imageslist.pop();
@@ -38,7 +39,7 @@ function addimages(e) {
     var files = e.target.files;
     var reader = new FileReader();
     reader.onload = function () {
-        imageslist.push(reader.result);
+        imageslist.push('images/ringedcityview3.png');
         renderimgsect();
         e.target.value = null; //for some reaseon this allows me to add back the file again
         //setTimeout(manual_set_images(), 500);
@@ -75,30 +76,42 @@ function Imageselect(props) {
 }
 function Imageprofile(props) {
 
-    return React.createElement('div', { id: 'profilesection', style: { backgroundImage: "url(" + imageslist[0] + ")" } });
+    return React.createElement(
+        'div',
+        { id: 'profile_section_container' },
+        React.createElement(
+            'div',
+            { id: 'profilesection' },
+            React.createElement('img', { src: imageslist[0] })
+        )
+    );
 }
 //onmousedown={function () { mousedown(e); }} onmouseup={mouseup()}
 //onmousemove = { function() { drag_background_image(e); } }
 function mousedown(e) {
-    var rect = e.target.getBoundingClientRect();
-    tempx = e.clientX - rect.left;
-    tempy = e.clientY - rect.top;
+    e.preventDefault();
+    var rect = e.currentTarget.getBoundingClientRect();
+    //alert(e.currentTarget);
+    tempx = e.currentTarget.clientX - rect.left;
+    tempy = e.currentTarget.clientY - rect.top;
     hold = 1;
     this.style.cursor = "grabbing";
 }
-function mouseup() {
+function mouseup(e) {
+    e.preventDefault();
     hold = 0;
     this.style.cursor = "grab";
 }
-function mouseout() {
+function mouseout(e) {
+    e.preventDefault();
     hold = 0;
     this.style.cursor = "";
 }
 function check_small_image(added) {
-    var profelement = document.getElementById('profilesection');
-    var container = profelement.style.backgroundImage;
-    var compsize = window.getComputedStyle(profelement, null);
-    var img = container.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
+    var profelement = document.querySelector('#profilesection');
+    var container = profelement.children[0].src;
+    var compsize = window.getComputedStyle(document.querySelector('#profile_section_container'), null);
+    var img = container; //.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
     if (added) {
         img = imageslist[imageslist.length - 1];
     }
@@ -109,7 +122,8 @@ function check_small_image(added) {
     var profheight2 = parseInt(compsize.height.split('px')[0]);
     if (profwidth2 >= imageex.width) {
         widthcheck = false;
-        profelement.style.backgroundPosition = (profwidth2 - imageex.width) / 2 + 'px ' + '0';
+        //profelement.style.backgroundPosition = (profwidth2 - imageex.width) / 2 + 'px ' + '0';
+        profelement.style.transform = "translate(" + (profwidth2 - imageex.width) / 2 + 'px, ' + '0px)';
         profile_backgroundpos_x = (profwidth2 - imageex.width) / 2;
         profile_backgroundpos_y = 0;
     } else {
@@ -118,11 +132,13 @@ function check_small_image(added) {
     if (profheight2 >= imageex.height) {
         heightcheck = false;
         if (widthcheck == false) {
-            profelement.style.backgroundPosition = (profwidth2 - imageex.width) / 2 + 'px ' + (profheight2 - imageex.height) / 2 + 'px';
+            //profelement.style.backgroundPosition = (profwidth2 - imageex.width) / 2 + 'px ' + (profheight2 - imageex.height) / 2 + 'px';
+            profelement.style.transform = "translate(" + (profwidth2 - imageex.width) / 2 + 'px, ' + (profheight2 - imageex.height) / 2 + 'px)';
             profile_backgroundpos_x = (profwidth2 - imageex.width) / 2;
             profile_backgroundpos_y = (profheight2 - imageex.height) / 2;
         } else {
-            profelement.style.backgroundPosition = '0 ' + (profheight2 - imageex.height) / 2 + 'px';
+            //profelement.style.backgroundPosition = '0 ' + (profheight2 - imageex.height) / 2 + 'px';
+            profelement.style.transform = 'translate(0px, ' + (profheight2 - imageex.height) / 2 + 'px)';
             profile_backgroundpos_x = 0;
             profile_backgroundpos_y = (profheight2 - imageex.height) / 2;
         }
@@ -130,27 +146,28 @@ function check_small_image(added) {
         heightcheck = true;
     }
     if (heightcheck && widthcheck) {
-        profelement.style.backgroundPosition = '';
+        profelement.style.transform = 'translate(0, 0)';
         profile_backgroundpos_x = 0;
         profile_backgroundpos_y = 0;
     }
 }
 //check_small_image();
 function drag_background_image(e) {
-    var el = this;
+    e.preventDefault();
+    var el = document.querySelector('#profilesection');
     //var img = this.style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
-    var img = this.style.backgroundImage.slice(5, -2);
+    var img = document.querySelector('#profilesection img').src;
     //alert(img);
     //window.getComputedStyle(this, null).backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
     var image = new Image();
     image.src = img;
-    var profelement = document.getElementById('profilesection');
+    var profelement = document.getElementById('profile_section_container');
     var compsize = window.getComputedStyle(profelement, null);
     //var prof_window = window.getComputedStyle(profelement, null);
     var profwidth = parseInt(compsize.width.split('px')[0]);
     var profheight = parseInt(compsize.height.split('px')[0]);
     if (hold && mousein) {
-        var rect2 = e.target.getBoundingClientRect();
+        var rect2 = e.currentTarget.getBoundingClientRect();
         var posx = e.clientX - rect2.left;
         var posy = e.clientY - rect2.top;
         var diffx = posx - tempx;
@@ -165,10 +182,11 @@ function drag_background_image(e) {
         diffy = parseInt(diffy);
         var unevendiffx = diffx;
         var unevendiffy = diffy;
-        if (this.style.backgroundPosition == null || this.style.backgroundPosition == '') {
+        if (el.style.transform == null || el.style.transform == '') {
             if (diffx > 0) {
                 diffx = 0;
             }
+            alert('here');
             //if ((!(widthcheck && heightcheck)) && diffx >= unevendiffx) {
             //  actx = unevendiffx;
             //}
@@ -184,23 +202,33 @@ function drag_background_image(e) {
             if (heightcheck == false) {
                 diffy = (profheight - image.height) / 2;
             }
-            el.style.backgroundPosition = diffx + "px " + diffy + "px";
+            //el.style.backgroundPosition = diffx + "px " + diffy + "px";
+            el.style.transform = "translate(" + diffx + "px, " + diffy + "px)";
             profile_backgroundpos_x = difx;
             profile_backgroundpos_y = diffy;
         } else {
-            var actualvals = this.style.backgroundPosition.split(" ");
-            var actx = parseInt(actualvals[0].replace("px", ""));
-            var acty = parseInt(actualvals[1].replace("px", ""));
+            //var actualvals = this.style.backgroundPosition.split(" ");
+            var actualvals = document.querySelector('#profilesection').style.transform;
+            var actx = actualvals.slice(10, -1).split(",")[0].split("px")[0];
+            var acty = actualvals.slice(10, -1).split(",")[1].split("px")[0];
+            actx = parseInt(actx);
+            acty = parseInt(acty);
+            //var actx = parseInt(actualvals[0].replace("px", ""));
+            //var acty = parseInt(actualvals[1].replace("px", ""));
             actx += diffx;
             acty += diffy;
+            //alert(actx);
             var unevenactx = actx;
             var unevenacty = acty;
+            //if (actx > 0) {
             if (actx > 0) {
                 actx = 0;
             }
             //if ((!(widthcheck && heightcheck)) && actx >= unevenactx) {
             //  actx = unevenactx;
             //}
+            //if (actx < (image.width * -1) + profwidth) {
+            //alert()
             if (actx < image.width * -1 + profwidth) {
                 actx = image.width * -1 + profwidth;
             }
@@ -219,7 +247,7 @@ function drag_background_image(e) {
             if (heightcheck == false) {
                 acty = (profheight - image.height) / 2;
             }
-            el.style.backgroundPosition = actx + "px " + acty + "px";
+            el.style.transform = "translate(" + actx + "px, " + acty + "px)";
             profile_backgroundpos_x = actx;
             profile_backgroundpos_y = acty;
         }
@@ -248,8 +276,9 @@ function Providedimage(props) {
 }
 function change_profile(e) {
     var source = e.target.src;
-    var el = document.getElementById('profilesection');
-    el.style.setProperty('background-image', "url(" + source + ")"); //this needs to be the computed style or the other way around
+    var el = document.querySelector('#profilesection img');
+    //el.style.setProperty('background-image', "url(" + source + ")"); //this needs to be the computed style or the other way around
+    el.src = source;
     currentimg = source;
     if (source == imageslist[imageslist.length - 1]) {
         alert('yeah');
@@ -261,9 +290,9 @@ function change_profile(e) {
 function renderimgsect() {
     var place = document.getElementById('imgs');
     ReactDOM.render(React.createElement(Imageselectsection, null), place);
-    document.getElementById("profilesection").addEventListener("mousemove", drag_background_image);
-    document.getElementById("profilesection").addEventListener("mousedown", mousedown);
-    document.getElementById("profilesection").addEventListener("mouseup", mouseup);
-    document.getElementById("profilesection").addEventListener("mouseout", mouseout);
+    document.getElementById("profile_section_container").addEventListener("mousemove", drag_background_image);
+    document.getElementById("profile_section_container").addEventListener("mousedown", mousedown);
+    document.getElementById("profile_section_container").addEventListener("mouseup", mouseup);
+    document.getElementById("profile_section_container").addEventListener("mouseout", mouseout);
 }
 export { hold, mousein, tempx, tempy, Imageselectsection, Imageselect, Imageprofile, mousedown, mouseup, drag_background_image, renderimgsect, check_small_image, mouseout, Imageoptions, Providedimage, imageslist, change_profile, profile_backgroundpos_x, profile_backgroundpos_y, currentimg };
