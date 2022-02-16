@@ -19,9 +19,7 @@ function Contactinputsection(props) {
         <Essentialcontactrow />
     </div>;
 }
-function lmao() {
-    alert(contact_inputs.phone);
-}
+
 class Contactinput extends React.Component {
     constructor(props) {
         super(props);

@@ -1,0 +1,357 @@
+body{
+    margin:0;
+    font-family:Arial;
+}
+body > div{
+    width:85%;
+    margin-bottom:20px;
+    margin-left:auto; margin-right:auto;
+    /*border-bottom:2px double black;*/
+}
+/*user profile section starts here*/
+#user_profile_sectioncomp{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+#user_profile_picture{
+    display:inline-flex;
+    height:100%;
+    margin-right:15px;
+}
+#user_profile_image_container{
+    overflow:hidden;
+    border:1px solid rgba(0,0,0,0.7);
+    border-radius:50%;
+    width:300px;
+    height:300px;
+}
+#user_info_container{
+    display:flex;
+}
+#user_profile_description {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: calc(100% - 310px);
+}
+#user_welcome_text{
+    text-align:center;
+    margin-bottom:30px;
+}
+/*user proficiency table starts here*/
+#proficiency_table_container{
+    margin-left:auto;margin-right:auto;
+    
+}
+#proficiency_table {
+    font-size: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#proficiency_table td {
+    border-left: 2px solid rgba(0,0,0,0.5);
+    width:200px;
+    padding-left:5px;
+}
+#proficiency_table tr:nth-child(2n+1){
+    background-color:rgba(0,0,0,0.1);
+}
+/*created carousel starts here*/
+#carousel_section {
+    padding: 40px;
+}
+
+#carousel_zoom_image {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box; /*this provides the padding to work properly*/
+    background-color: rgba(0,0,0,0.85);
+    z-index: 999;
+}
+
+    #carousel_zoom_image:hover {
+        cursor: zoom-out;
+    }
+
+#carousel_zoomed_image {
+    overflow: hidden;
+    object-fit: scale-down;
+    margin-left: auto;
+    margin-right: auto;
+    animation: zoomed_img ease 0.3s;
+}
+
+@keyframes zoomed_img {
+    0% {
+        transform: scale(0.5,0.5)
+    }
+
+    100% {
+        transform: scale(1,1)
+    }
+}
+
+.carousel {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid blue;
+}
+
+#full_carousel_head {
+    height: 120px;
+}
+
+#carousel_image_addition_head {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    border-bottom: 1px solid rgba(0,0,0,0.6);
+}
+
+#carousel_image_additionbut {
+    display: inline-flex;
+}
+
+#carousel_image_addition_head span {
+    font-size: 20px;
+}
+
+#carousel_added_head_images {
+    padding: 3px;
+    height: 90px;
+    margin-top: 5px;
+    position: relative;
+}
+
+.remove_image_but {
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    outline: none;
+    position: absolute;
+    left: 80%;
+    top: -5px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+}
+
+.carouselhead_image_container {
+    display: inline-flex;
+    margin-right: 7px;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 5%;
+    position: relative;
+}
+
+.added_carouselhead_image {
+    object-fit: contain;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+}
+
+.carousel_left_button {
+    position: absolute;
+    top: calc(50% - 80px);
+    left: 0;
+    padding: 10px;
+    width: 50px;
+    height: 80px;
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    z-index: 20;
+}
+
+    .carousel_left_button button {
+        cursor: pointer;
+    }
+
+.carousel_right_button {
+    position: absolute;
+    top: calc(50% - 80px);
+    right: 0;
+    padding: 10px;
+    width: 50px;
+    height: 80px;
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    z-index: 20;
+}
+
+    .carousel_right_button button {
+        cursor: pointer;
+    }
+
+.carousel_index_buttons {
+    width: 100px;
+    padding: 5px;
+    height: 25px;
+    background-color: rgba(0,0,0,0.1);
+    left: calc(50% - 35px);
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    z-index: 4;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.carousel_index {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.6);
+    border: 1px black solid;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+    .carousel_index:hover {
+        cursor: pointer;
+        background-color: rgba(0,0,0,0.4)
+    }
+
+.active_index {
+    background-color: white;
+}
+
+    .active_index:hover {
+        background-color: white;
+    }
+
+.carousel_main_image {
+    position: relative;
+    overflow: hidden;
+    width: 600px;
+    height: 400px;
+}
+
+    .carousel_main_image:hover {
+        cursor: zoom-in;
+    }
+
+    .carousel_main_image img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+.center_image {
+    margin: auto;
+    transition: left 0.4s ease, right 0.4s ease;
+}
+
+.right_image {
+    transition: left 0.4s ease, right 0.4s ease;
+}
+
+.left_image {
+    transition: left 0.4s ease, right 0.4s ease;
+}
+/*carousel ends here contactinfo starts*/
+#user_contact_section{
+    width:70%;
+}
+#contact_section {
+    padding: 40px;
+}
+
+#contact_input_main_container {
+    display: flex;
+    padding: 50px;
+    /*flex-wrap: wrap;
+    justify-content: flex-start;*/
+    flex-direction:column;
+}
+.essential_input_container{
+    display:flex;
+    margin-left:auto;
+    margin-right:auto;
+    justify-content:space-around;
+}
+.essential_input {
+    display: flex;
+    margin-right: 10px;
+    min-width: 100px;
+    max-width: 500px;
+}
+.contact_input {
+    display: flex;
+    min-width: 470px;
+    margin-right: 25px;
+    margin-bottom: 35px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.contact_input_image {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.contact_inputfield {
+    height: 30px;
+    font-size: 20px;
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    background-color:transparent;
+
+}
+.contact_inputfield:focus {
+    border: 2px solid rgba(0,0,0,0.8);
+    box-shadow: -1px 0 10px orange, 0 -1px 1px, 1px 0 1px, 0 1px 1px;
+}
+
+.essential_contact_row {
+    display: flex;
+    margin-left: 15px;
+    margin-right: 15px;
+    justify-content: space-evenly;
+}
+
+.essential_input {
+    display: flex;
+    height: 30px; /*this doesnt help either*/
+    align-content:center;
+}
+.essential_input i{
+    /*text-align:center;
+    vertical-align:middle; none of these work
+    align-items:center;*/
+    position:relative;
+    top:50%;
+    transform:translateY(-50%); /*this works, why*/
+    height:21px;
+    width:21px;
+}
+.essential_input input {
+    width: 350px;
+    height: 21px;
+    font-size: 17px;
+    padding: 3px;
+}
+
+.essential_input label {
+    margin-bottom: 4px;
+    font-size: 17px;
+    font-weight: 600;
+}

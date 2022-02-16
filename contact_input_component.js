@@ -35,9 +35,6 @@ function Contactinputsection(props) {
         React.createElement(Essentialcontactrow, null)
     );
 }
-function lmao() {
-    alert(contact_inputs.phone);
-}
 
 var Contactinput = function (_React$Component) {
     _inherits(Contactinput, _React$Component);

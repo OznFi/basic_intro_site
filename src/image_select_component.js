@@ -13,6 +13,10 @@ var imageobjects = []; //it is better to keep this info on the server side than 
 var profile_backgroundpos_x, profile_backgroundpos_y;
 var imageslist = ['images/400img.jpg', 'images/plague_doc.jfif', 'images/angel2.jpg', 'images/dragonheadgreatshield.png'];
 var currentimg = imageslist[0];
+var profile_imgobj = {
+    image_source: currentimg, image_translate_x: profile_backgroundpos_x,
+    image_translate_y: profile_backgroundpos_y
+}
 
 function Imageselectsection(props) {
     for (var o = 0; o < imageslist.length; o++) {
@@ -108,6 +112,8 @@ function check_small_image(added) {
         profelement.style.transform = "translate("+(profwidth2 - imageex.width) / 2 + 'px, ' + '0px)';
         profile_backgroundpos_x = (profwidth2 - imageex.width) / 2;
         profile_backgroundpos_y = 0;
+        profile_imgobj.image_translate_x = profile_backgroundpos_x;
+        profile_imgobj.image_translate_y = profile_backgroundpos_y;
     }
     else {
         widthcheck = true;
@@ -119,12 +125,18 @@ function check_small_image(added) {
             profelement.style.transform ="translate("+ (profwidth2 - imageex.width) / 2 + 'px, ' + (profheight2 - imageex.height) / 2 + 'px)';
             profile_backgroundpos_x = (profwidth2 - imageex.width) / 2;
             profile_backgroundpos_y = (profheight2 - imageex.height) / 2;
+            profile_imgobj.image_translate_x = profile_backgroundpos_x;
+            profile_imgobj.image_translate_y = profile_backgroundpos_y;
+
         }
         else {
             //profelement.style.backgroundPosition = '0 ' + (profheight2 - imageex.height) / 2 + 'px';
             profelement.style.transform = 'translate(0px, ' + (profheight2 - imageex.height) / 2 + 'px)';
             profile_backgroundpos_x = 0;
             profile_backgroundpos_y = (profheight2 - imageex.height) / 2;
+            profile_imgobj.image_translate_x = profile_backgroundpos_x;
+            profile_imgobj.image_translate_y = profile_backgroundpos_y;
+
         }
     }
     else {
@@ -134,6 +146,9 @@ function check_small_image(added) {
         profelement.style.transform = 'translate(0, 0)';
         profile_backgroundpos_x = 0;
         profile_backgroundpos_y = 0;
+        profile_imgobj.image_translate_x = profile_backgroundpos_x;
+        profile_imgobj.image_translate_y = profile_backgroundpos_y;
+
     }
 }
 //check_small_image();
@@ -191,6 +206,9 @@ function drag_background_image(e) {
             el.style.transform = "translate(" + diffx + "px, " + diffy + "px)";
             profile_backgroundpos_x = difx;
             profile_backgroundpos_y = diffy;
+            profile_imgobj.image_translate_x = profile_backgroundpos_x;
+            profile_imgobj.image_translate_y = profile_backgroundpos_y;
+
         }
         else {
             //var actualvals = this.style.backgroundPosition.split(" ");
@@ -236,6 +254,9 @@ function drag_background_image(e) {
             el.style.transform ="translate("+ actx + "px, " + acty + "px)";
             profile_backgroundpos_x = actx;
             profile_backgroundpos_y = acty;
+            profile_imgobj.image_translate_x = profile_backgroundpos_x;
+            profile_imgobj.image_translate_y = profile_backgroundpos_y;
+
         }
         
     }
@@ -267,6 +288,7 @@ function change_profile(e) {
     //el.style.setProperty('background-image', "url(" + source + ")"); //this needs to be the computed style or the other way around
     el.src = source;
     currentimg = source;
+    profile_imgobj.image_source = currentimg;
     if (source == imageslist[imageslist.length - 1]) {
         alert('yeah');
         check_small_image(true);
@@ -285,5 +307,5 @@ function renderimgsect() {
 export {
     hold, mousein, tempx, tempy, Imageselectsection, Imageselect, Imageprofile, mousedown,
     mouseup, drag_background_image, renderimgsect, check_small_image, mouseout, Imageoptions, Providedimage, imageslist,
-    change_profile, profile_backgroundpos_x, profile_backgroundpos_y, currentimg
+    change_profile, profile_backgroundpos_x, profile_backgroundpos_y, currentimg, profile_imgobj
 };
